@@ -1,5 +1,5 @@
 <x-app-layout>
-        @vite('resources/css/project-calendar.css')
+@vite('resources/css/project-calendar.css')
 
 <x-slot name="header">
 
@@ -13,8 +13,7 @@
 
             <a
                 href="{{ route('projects.index') }}"
-                class="text-sm text-gray-600 hover:text-gray-900"
-            >
+                class="text-sm text-gray-600 hover:text-gray-900">
                 {{ __('Back to Projects') }}
             </a>
 
@@ -455,7 +454,7 @@
 
         {{-- Messages --}}
 
-        @include('messages._board', ['project' => $project])
+        @include('messages._board', ['project' => $project, 'task' => null])
 
         @php
 

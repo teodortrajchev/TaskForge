@@ -17,7 +17,8 @@
                     </x-nav-link>
                 </div>
             </div>
-
+            <div class="flex items-center">
+                <x-notification-bell />
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -62,6 +63,7 @@
                 </button>
             </div>
         </div>
+        </div> 
     </div>
 
     <!-- Responsive Navigation Menu -->

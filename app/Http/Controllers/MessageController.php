@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Notifications\MessageNotifier;
 
 class MessageController extends Controller
 {
@@ -19,6 +20,7 @@ class MessageController extends Controller
     {
         abort_unless($project->roleFor($request->user()), 403);
         abort_if($task && $task->project_id !== $project->id, 404);
+        MessageNotifier::markBoardRead($request->user(), $project, $task);
 
         $messages = $project->messages()
             ->when(
@@ -51,7 +53,7 @@ class MessageController extends Controller
             'user_id' => $request->user()->id,
             'body' => trim($data['body']),
         ])->load('user:id,name');
-
+        MessageNotifier::send($message, $project, $task);
         return response()->json($this->present($message, $project, $request->user()), 201);
     }
 

@@ -13,7 +13,7 @@
         : route('projects.messages.destroy', [$project, '__ID__']);
 @endphp
 
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
+<div id="message-board" class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
      x-data="messageBoard({
          indexUrl: @js($indexUrl),
          storeUrl: @js($storeUrl),
@@ -22,7 +22,7 @@
     <div class="p-6">
         <div class="flex items-center justify-between mb-4">
             <h3 class="text-sm font-medium text-gray-900">
-                {{ $task ? __('Task discussion') : __('Message board') }}
+                {{ $task ? __('Task discussion') : __('Project discussion') }}
             </h3>
             <span class="text-xs text-gray-400">{{ __('Visible to all project members') }}</span>
         </div>
@@ -114,6 +114,7 @@
                         this.messages = data.messages;
                         if (stick) this.scrollToBottom();
                     }
+                    if (initial) window.dispatchEvent(new CustomEvent('notifications-refresh'));
                 } catch (e) {
                     // silent; next poll retries
                 } finally {

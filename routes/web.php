@@ -7,7 +7,7 @@ use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
-
+use App\Http\Controllers\NotificationController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -51,6 +51,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{project}/tasks/{task}/messages', [MessageController::class, 'index'])->name('projects.tasks.messages.index');
     Route::post('/projects/{project}/tasks/{task}/messages', [MessageController::class, 'store'])->name('projects.tasks.messages.store');
     Route::delete('/projects/{project}/tasks/{task}/messages/{message}', [MessageController::class, 'destroy'])->name('projects.tasks.messages.destroy');
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
+    Route::get('/notifications/{notification}', [NotificationController::class, 'open'])->name('notifications.open');
+
+
     });
 
 require __DIR__.'/auth.php';
