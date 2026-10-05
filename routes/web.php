@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/projects/{project}/tasks/{task}/complete', [TaskController::class, 'complete'])->name('projects.tasks.complete');
     Route::patch('/projects/{project}/tasks/{task}/status', [TaskController::class, 'updateStatus'])->name('projects.tasks.status');
     Route::patch('/projects/{project}/tasks/{task}/due-date', [TaskController::class, 'updateDueDate'])->name('projects.tasks.due-date');
+
+    Route::get('/projects/{project}/history', [TaskController::class, 'history'])->name('projects.history');
     // Members
     Route::put('/projects/{project}/members/{user}', [ProjectMemberController::class, 'update'])->name('projects.members.update');
     Route::delete('/projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('projects.members.destroy');

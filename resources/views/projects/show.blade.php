@@ -10,7 +10,9 @@
         </h2>
 
         <div class="flex items-center gap-4">
-
+            <a href="{{ route('projects.history', $project) }}" class="text-sm text-gray-600 hover:text-gray-900">
+                {{ __('Task history') }}
+            </a>
             <a
                 href="{{ route('projects.index') }}"
                 class="text-sm text-gray-600 hover:text-gray-900">

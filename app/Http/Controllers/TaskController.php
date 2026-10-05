@@ -194,6 +194,18 @@ class TaskController extends Controller
         ];
     }
 
+    public function history(Request $request, Project $project)
+    {
+        abort_unless($project->roleFor($request->user()), 403);
+
+        $tasks = $project->tasks()
+            ->with('assignees:id,name')
+            ->latest()
+            ->paginate(30);
+
+        return view('projects.history', compact('project', 'tasks'));
+    }
+
     /** Only owners and managers can change who a task is assigned to. */
     private function syncAssignees(Request $request, Project $project, Task $task, array $ids): void
     {
