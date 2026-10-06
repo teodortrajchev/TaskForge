@@ -8,6 +8,11 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\FileUploadController;
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,10 +24,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+    //Github
     Route::resource('projects', ProjectController::class)->only(['index', 'create', 'store', 'show', 'destroy']);
     Route::get('/github/repository', [ProjectController::class, 'githubRepo'])
     ->middleware('throttle:20,1')
     ->name('github.repository');
+    Route::post('/github/commits', [ProjectController::class, 'list_commits'])->name('github.commits');
+
+
     Route::patch('/projects/{project}/status', [ProjectController::class, 'updateStatus'])->name('projects.status.update');
 
     Route::get('/projects/{project}/tasks/create', [TaskController::class, 'create'])->name('projects.tasks.create');
@@ -61,6 +71,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
     Route::get('/notifications/{notification}', [NotificationController::class, 'open'])->name('notifications.open');
 
+//     // File Upload
+//   Route::get('/upload', [FileUploadController::class, 'index'])->name('upload.index');
+//   Route::post('/upload', [FileUploadController::class, 'store'])->name('upload.store');
 
     });
 

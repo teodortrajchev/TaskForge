@@ -458,7 +458,8 @@
             </div>
 
         </div>
-
+        {{-- GitHub commits --}}
+        @include('github.commits', ['commits' => $commits])
         {{-- Messages --}}
 
         @include('messages._board', ['project' => $project, 'task' => null])

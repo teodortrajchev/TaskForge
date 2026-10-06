@@ -7,7 +7,10 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use InvalidArgumentException;
+use RuntimeException;
 use Throwable;
+
 class ProjectController extends Controller
 {
     public function index(Request $request)
@@ -43,6 +46,69 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', $project)->with('status', 'Project created.');
     }
 
+    public function list_commits(Request $request)
+    {
+        $validated = $request->validate([
+            'url' => ['required', 'string', 'max:255'],
+        ]);
+
+        try {
+            return response()->json([
+                'commits' => $this->fetchCommits($validated['url']),
+            ]);
+        } catch (InvalidArgumentException $e) {
+            return response()->json(['message' => $e->getMessage()], 422);
+        } catch (RuntimeException $e) {
+            return response()->json(['message' => $e->getMessage()], 502);
+        }
+    }
+
+    private function fetchCommits(string $url): array
+    {
+        $url = trim($url);
+        $pattern = '#^https?://(?:www\.)?github\.com/([A-Za-z0-9_-]+)/([A-Za-z0-9_.-]+?)(?:\.git)?/?$#i';
+
+        if (!preg_match($pattern, $url, $matches)) {
+            throw new InvalidArgumentException(
+                'Enter a GitHub repository URL, like https://github.com/owner/repo.'
+            );
+        }
+
+        $http = Http::acceptJson()
+            ->withUserAgent(config('app.name', 'Laravel'))
+            ->timeout(8);
+
+        if ($token = config('services.github.token')) {
+            $http = $http->withToken($token);
+        }
+
+        try {
+            $response = $http->get(
+                "https://api.github.com/repos/{$matches[1]}/{$matches[2]}/commits",
+                ['per_page' => 100]
+            );
+        } catch (Throwable $e) {
+            report($e);
+            throw new RuntimeException('Could not reach GitHub. Try again in a moment.', 0, $e);
+        }
+
+        if ($response->failed()) {
+            throw new RuntimeException(
+                "GitHub returned an error (HTTP {$response->status()})."
+            );
+        }
+
+        return collect($response->json())->map(fn ($commit) => [
+            'sha' => $commit['sha'],
+            'short_sha' => substr($commit['sha'], 0, 7),
+            'message' => explode("\n", data_get($commit, 'commit.message', ''))[0],
+            'author' => data_get($commit, 'author.login') ?? data_get($commit, 'commit.author.name'),
+            'avatar_url' => data_get($commit, 'author.avatar_url'),
+            'date' => data_get($commit, 'commit.author.date'),
+            'url' => $commit['html_url'],
+        ])->values()->all();
+    }
+
     public function show(Request $request, Project $project)
     {
         abort_unless($project->roleFor($request->user()), 403);
@@ -51,8 +117,18 @@ class ProjectController extends Controller
         $invitations = $project->roleFor($request->user())->canManage()
             ? $project->invitations()->pending()->latest()->get()
             : collect();
+        $commits = [];
+        $commitError = null;
 
-        return view('projects.show', compact('project', 'invitations'));
+        if ($project->github_url) {
+            try {
+                $commits = $this->fetchCommits($project->github_url);
+            } catch (RuntimeException $e) {
+                $commitError = $e->getMessage();
+            }
+        }
+
+        return view('projects.show', compact('project', 'invitations', 'commits', 'commitError'));
     }
 
         public function updateStatus(Request $request, Project $project)
@@ -133,6 +209,8 @@ class ProjectController extends Controller
             'url' => $response->json('html_url'),
         ]);
     }
+
+
 
     public function destroy(Request $request, Project $project)
     {
