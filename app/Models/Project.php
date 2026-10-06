@@ -13,8 +13,7 @@ class Project extends Model
 
     
 
-    protected $fillable = ['owner_id', 'name', 'description', 'status', 'due_date'];
-
+    protected $fillable = ['owner_id', 'name', 'description', 'github_url', 'status', 'due_date'];
     protected $casts = ['due_date' => 'date'];
 
     public function roleFor(?User $user): ?ProjectRole

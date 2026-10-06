@@ -6,7 +6,8 @@ use App\Enums\ProjectRole;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Http;
+use Throwable;
 class ProjectController extends Controller
 {
     public function index(Request $request)
@@ -27,6 +28,7 @@ class ProjectController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:5000'],
             'due_date' => ['nullable', 'date'],
+            'github_url' => ['nullable', 'url:https', 'max:255', 'starts_with:https://github.com/'],
         ]);
 
         $user = $request->user();
@@ -70,6 +72,68 @@ class ProjectController extends Controller
                     : 'Project reopened.');
         }
 
+
+
+
+    public function githubRepo(Request $request)
+    {
+        $request->validate([
+            'url' => ['required', 'string', 'max:255'],
+        ]);
+
+        $url = trim($request->input('url'));
+
+        $pattern = '#^https?://(?:www\.)?github\.com/([A-Za-z0-9_-]+)/([A-Za-z0-9_.-]+?)(?:\.git)?/?$#i';
+
+        if (!preg_match($pattern, $url, $m)) {
+            return response()->json([
+                'message' => 'Enter a GitHub repository URL, like https://github.com/owner/repo.',
+            ], 422);
+        }
+
+        $owner = $m[1];
+        $repo = $m[2];
+
+        $http = Http::acceptJson()
+            ->withUserAgent(config('app.name', 'Laravel'))
+            ->timeout(8);
+
+        if ($token = config('services.github.token')) {
+            $http = $http->withToken($token);
+        }
+
+        try {
+            $response = $http->get(
+                "https://api.github.com/repos/{$owner}/{$repo}"
+            );
+        } catch (Throwable $e) {
+            report($e);
+
+            return response()->json(['message' => 'Could not reach GitHub. Try again in a moment.',], 502);
+        }
+
+        if ($response->status() === 404) {
+            return response()->json([ 'message' => 'Repository not found (or it is private).',], 404);
+        }
+
+        if (in_array($response->status(), [403, 429])) {
+            return response()->json([  'message' => 'GitHub rate limit reached. Try again later.',], 429);
+        }
+
+        if ($response->failed()) {
+            return response()->json([
+                'message' => 'GitHub returned an error.',
+                'github_status' => $response->status(),
+                'github_response' => $response->json(),], 502);
+        }
+
+        return response()->json([
+            'name' => $response->json('name'),
+            'description' => $response->json('description') ?? '',
+            'url' => $response->json('html_url'),
+        ]);
+    }
+
     public function destroy(Request $request, Project $project)
     {
         abort_unless($project->roleFor($request->user())?->canDeleteProject(), 403);
@@ -82,5 +146,8 @@ class ProjectController extends Controller
             ->route('projects.index')
             ->with('status', "Project \"{$name}\" was deleted.");
     }
+
+
+    
 }
 ?>

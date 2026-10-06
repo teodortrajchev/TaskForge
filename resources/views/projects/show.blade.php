@@ -127,7 +127,12 @@
                     </p>
 
                 @endif
-
+                @if ($project->github_url)
+                    <a href="{{ $project->github_url }}" target="_blank" rel="noopener noreferrer"
+                    class="mt-3 inline-flex items-center gap-1 text-sm text-indigo-600 hover:underline">
+                        {{ __('View on GitHub') }} &rarr;
+                    </a>
+                @endif
             </div>
 
         </div>
