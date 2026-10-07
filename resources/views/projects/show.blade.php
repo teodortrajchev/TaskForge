@@ -463,7 +463,7 @@
         {{-- Messages --}}
 
         @include('messages._board', ['project' => $project, 'task' => null])
-
+        @include('projects._files', ['project' => $project])
         @php
 
             $actorRole = $project->roleFor(auth()->user());

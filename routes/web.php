@@ -71,9 +71,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
     Route::get('/notifications/{notification}', [NotificationController::class, 'open'])->name('notifications.open');
 
-//     // File Upload
-//   Route::get('/upload', [FileUploadController::class, 'index'])->name('upload.index');
-//   Route::post('/upload', [FileUploadController::class, 'store'])->name('upload.store');
+     // File Upload
+    Route::post('/projects/{project}/files', [FileUploadController::class, 'store'])->name('projects.files.store');
+    Route::get('/projects/{project}/files/{file}', [FileUploadController::class, 'download'])->name('projects.files.download');
+    Route::delete('/projects/{project}/files/{file}', [FileUploadController::class, 'destroy'])->name('projects.files.destroy');
 
     });
 

@@ -6,7 +6,7 @@ use App\Enums\ProjectRole;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Notifications\HasDueReminders;
-
+use Illuminate\Support\Facades\Storage;
 class Project extends Model
 {
     use HasDueReminders;
@@ -35,6 +35,19 @@ class Project extends Model
     public function invitations()
     {
         return $this->hasMany(ProjectInvitation::class);
+    }
+
+     protected static function booted(): void
+    {
+        // DB rows cascade, but files on disk don't, so clean them up here.
+        static::deleting(function (Project $project) {
+            Storage::disk(ProjectFile::DISK)->deleteDirectory("project-files/{$project->id}");
+        });
+    }
+
+    public function files()
+    {
+        return $this->hasMany(ProjectFile::class)->latest('id');
     }
 
     public function members()

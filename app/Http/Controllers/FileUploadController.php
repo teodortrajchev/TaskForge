@@ -1,4 +1,4 @@
-<!-- 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -61,6 +61,7 @@ class FileUploadController extends Controller
 
         abort_unless($disk->exists($file->file_path), 404);
 
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
         return $disk->download($file->file_path, $file->file_name, [
             'X-Content-Type-Options' => 'nosniff',
         ]);
@@ -79,4 +80,4 @@ class FileUploadController extends Controller
             ->to(route('projects.show', $project) . '#files')
             ->with('status', "File \"{$name}\" was deleted.");
     }
-} -->
+}
