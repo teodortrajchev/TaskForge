@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\FileUploadController;
-
+use App\Http\Controllers\SearchController;
 
 
 
@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{project}/files/{file}', [FileUploadController::class, 'download'])->name('projects.files.download');
     Route::delete('/projects/{project}/files/{file}', [FileUploadController::class, 'destroy'])->name('projects.files.destroy');
 
+    // Search
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
     });
 
 require __DIR__.'/auth.php';
