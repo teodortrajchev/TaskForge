@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use RuntimeException;
 use Throwable;
+use App\Models\User;
 
 class ProjectController extends Controller
 {
@@ -119,7 +120,31 @@ class ProjectController extends Controller
             : collect();
         $commits = [];
         $commitError = null;
+        $tasksQuery = $project->tasks()->with('assignees');
 
+        if ($request->filled('assignee')) {
+            $tasksQuery->whereHas('assignees', function ($query) use ($request) {
+                $query->where('users.id', $request->assignee);
+            });
+        }
+
+        if ($request->filled('status')) {
+            $tasksQuery->where('status', $request->status);
+        }
+
+        
+
+        if ($request->filled('date_to')) {
+            $tasksQuery->whereDate('due_date', '<=', $request->date_to);
+        }
+
+        $tasks = $tasksQuery->get();
+
+        $assignees = User::whereIn('id',$project->tasks()->with('assignees')->get()->flatMap(function ($task) {
+            return $task->assignees->pluck('id');
+        })->unique())->orderBy('name')->get();
+
+    
         if ($project->github_url) {
             try {
                 $commits = $this->fetchCommits($project->github_url);
@@ -128,8 +153,9 @@ class ProjectController extends Controller
             }
         }
 
-        return view('projects.show', compact('project', 'invitations', 'commits', 'commitError'));
+        return view('projects.show', compact('project', 'invitations', 'commits', 'commitError','tasks','assignees'));
     }
+    
 
         public function updateStatus(Request $request, Project $project)
         {

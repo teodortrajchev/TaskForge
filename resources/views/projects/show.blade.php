@@ -153,16 +153,120 @@
                 $days[] = $weekStart->copy()->addDays($i);
             }
 
-            $scheduledTasks = $project->tasks->filter(function ($task) {
-                return $task->due_date !== null;
-            });
+         
+        $scheduledTasks = $tasks->filter(function ($task) {
+            return $task->due_date !== null;
+        });
 
-            $unscheduledTasks = $project->tasks->filter(function ($task) {
-                return $task->due_date === null;
-            });
-
+        $unscheduledTasks = $tasks->filter(function ($task) {
+            return $task->due_date === null;
+        });
         @endphp
+<form method="GET" action="{{ route('projects.show', $project) }}" class="mb-6">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
 
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h3 class="text-sm font-semibold text-gray-800">
+                    Filter tasks
+                </h3>
+            </div>
+
+            <a
+                href="{{ route('projects.show', $project) }}"
+                class="text-sm text-gray-500 hover:text-gray-800"
+            >
+                Clear filters
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+
+            {{-- Assignee --}}
+            <div>
+                <label class="block text-xs font-medium text-gray-600 mb-1">
+                    Assignee
+                </label>
+
+                <select
+                    name="assignee"
+                    class="w-full rounded-lg border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                >
+                    <option value="">All assignees</option>
+
+                    @foreach ($assignees as $assignee)
+                        <option
+                            value="{{ $assignee->id }}"
+                            {{ request('assignee') == $assignee->id ? 'selected' : '' }}
+                        >
+                            {{ $assignee->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Status --}}
+            <div>
+                <label class="block text-xs font-medium text-gray-600 mb-1">
+                    Status
+                </label>
+
+                <select
+                    name="status"
+                    class="w-full rounded-lg border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                >
+                    <option value="">All statuses</option>
+
+                    <option
+                        value="todo"
+                        {{ request('status') === 'todo' ? 'selected' : '' }}
+                    >
+                        To do
+                    </option>
+
+                    <option
+                        value="in_progress"
+                        {{ request('status') === 'in_progress' ? 'selected' : '' }}
+                    >
+                        In progress
+                    </option>
+
+                    <option
+                        value="completed"
+                        {{ request('status') === 'completed' ? 'selected' : '' }}
+                    >
+                        Completed
+                    </option>
+                </select>
+            </div>
+
+
+            {{-- Due --}}
+            <div>
+                <label class="block text-xs font-medium text-gray-600 mb-1">
+                    Due to
+                </label>
+
+                <input
+                    type="date"
+                    name="date_to"
+                    value="{{ request('date_to') }}"
+                    class="w-full rounded-lg border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                >
+            </div>
+
+        </div>
+
+        <div class="flex justify-end mt-4">
+            <button
+                type="submit"
+                class="inline-flex items-center px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition"
+            >
+                Apply filters
+            </button>
+        </div>
+    </div>
+</form>
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <div class="p-6 text-gray-900">
