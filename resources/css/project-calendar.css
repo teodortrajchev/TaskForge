@@ -7,15 +7,15 @@
     display: grid;
     grid-template-columns: repeat(7, minmax(180px, 1fr));
     min-width: 1260px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #223452;
     border-radius: 0.75rem;
     overflow: hidden;
 }
 
 .calendar-day {
     min-height: 430px;
-    background: #f9fafb;
-    border-right: 1px solid #e5e7eb;
+    background: #0d1a31;
+    border-right: 1px solid #223452;
     transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -24,19 +24,19 @@
 }
 
 .calendar-day-today {
-    background: #eff6ff;
+    background: #121d40;
 }
 
 .calendar-day-drag-over {
-    background: #dbeafe;
-    border-color: #93c5fd;
+    background: #1a2754;
+    border-color: #657bff;
 }
 
 .calendar-day-header {
     min-height: 82px;
     padding: 14px;
-    background: #f3f4f6;
-    border-bottom: 1px solid #e5e7eb;
+    background: #101d34;
+    border-bottom: 1px solid #223452;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -44,19 +44,19 @@
 }
 
 .calendar-day-today .calendar-day-header {
-    background: #dbeafe;
+    background: #1b2552;
 }
 
 .calendar-day-name {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #374151;
+    color: #e7edff;
 }
 
 .calendar-day-date {
     margin-top: 3px;
     font-size: 0.75rem;
-    color: #6b7280;
+    color: #93a6ca;
 }
 
 .today-badge {
@@ -64,7 +64,7 @@
     align-items: center;
     padding: 0.2rem 0.5rem;
     border-radius: 9999px;
-    background: #2563eb;
+    background: linear-gradient(135deg, #657bff, #8b5cf6);
     color: white;
     font-size: 0.65rem;
     font-weight: 600;
@@ -79,16 +79,17 @@
 }
 
 .calendar-task {
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: linear-gradient(145deg, #142541, #0e1b31);
+    border: 1px solid #263958;
     border-radius: 0.5rem;
     padding: 12px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
 }
 
 .calendar-task:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-color: #5969aa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transform: translateY(-1px);
 }
 
@@ -113,20 +114,20 @@
 }
 
 .calendar-task-title {
-    color: #111827;
+    color: #e8efff;
     font-size: 0.875rem;
     font-weight: 600;
     line-height: 1.25rem;
 }
 
 .calendar-task-title:hover {
-    color: #2563eb;
+    color: #9eacff;
     text-decoration: underline;
 }
 
 .calendar-task-edit {
     flex-shrink: 0;
-    color: #2563eb;
+    color: #9eacff;
     font-size: 0.7rem;
 }
 
@@ -136,7 +137,7 @@
 
 .calendar-task-description {
     margin-top: 7px;
-    color: #6b7280;
+    color: #8fa2c4;
     font-size: 0.75rem;
     line-height: 1rem;
     display: -webkit-box;
@@ -163,18 +164,18 @@
 }
 
 .priority-high {
-    background: #fee2e2;
-    color: #b91c1c;
+    background: rgba(245, 74, 112, 0.14);
+    color: #ff8da3;
 }
 
 .priority-medium {
-    background: #fef3c7;
-    color: #b45309;
+    background: rgba(250, 204, 21, 0.13);
+    color: #fcd34d;
 }
 
 .priority-low {
-    background: #f3f4f6;
-    color: #4b5563;
+    background: rgba(147, 166, 202, 0.14);
+    color: #aab9d7;
 }
 
 .calendar-status {
@@ -188,30 +189,30 @@
 }
 
 .status-todo {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: rgba(85, 168, 255, 0.14);
+    color: #7fb8ff;
 }
 
 .status-in-progress {
-    background: #fef3c7;
-    color: #b45309;
+    background: rgba(250, 204, 21, 0.13);
+    color: #fcd34d;
 }
 
 .status-completed {
-    background: #dcfce7;
-    color: #15803d;
+    background: rgba(53, 214, 161, 0.14);
+    color: #58e0b5;
 }
 
 .status-pending {
-    background: #f3f4f6;
-    color: #4b5563;
+    background: rgba(147, 166, 202, 0.14);
+    color: #aab9d7;
 }
 
 .calendar-task-assignees {
     margin-top: 9px;
     padding-top: 9px;
-    border-top: 1px solid #f3f4f6;
-    color: #6b7280;
+    border-top: 1px solid #223452;
+    color: #8194b7;
     font-size: 0.65rem;
     line-height: 1rem;
 }
@@ -219,7 +220,7 @@
 .calendar-empty {
     padding: 35px 8px;
     text-align: center;
-    color: #9ca3af;
+    color: #6f83a8;
     font-size: 0.75rem;
 }
 

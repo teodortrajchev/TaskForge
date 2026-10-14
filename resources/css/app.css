@@ -4,3 +4,250 @@
 [x-cloak] {
     display: none !important;
 }
+
+/* 
+   TaskForge global theme
+   Loaded once from resources/css/app.css, so it applies on every page.
+   */
+
+/* ---- Page base (dark workspace) ---- */
+html:has(.tf-dashboard), html:has(.tf-nav) { color-scheme: dark; }
+body { background: #070f20; }
+.min-h-screen.bg-gray-100 { background: transparent; }
+
+/* Layout header bar (the strip under the nav on inner pages).
+   !important is needed because Bootstrap (loaded in the layout) defines
+   .bg-white and .shadow with !important. */
+header[class] { background: #070f20 !important; border-bottom: 1px solid #162540; box-shadow: none !important; }
+header[class] > div { max-width: 1440px; padding-left: 24px; padding-right: 24px; }
+header[class] :is(h1, h2, h3) { color: #f4f7ff; }
+
+/* ---- Navigation ---- */
+.tf-nav { background: #0a1428; border-bottom: 1px solid #223452; color: #e7edff; }
+.tf-logo { color: #e7edff; }
+
+/* Desktop links */
+.tf-link { display: inline-flex; align-items: center; padding: 0 4px; border-bottom: 2px solid transparent; color: #93a6ca; font-size: .875rem; font-weight: 600; text-decoration: none; transition: color .15s, border-color .15s; }
+.tf-link:hover { color: #e7edff; border-bottom-color: #3a4f78; }
+.tf-link-active, .tf-link-active:hover { color: #f4f7ff; border-bottom-color: #8b7cff; }
+.tf-link:focus-visible, .tf-mobile-link:focus-visible { outline: 2px solid #8b9cff; outline-offset: 2px; }
+
+/* Search */
+.tf-nav .tf-search { border: 1px solid #243657; background: #101d34; color: #edf2ff; }
+.tf-nav .tf-search::placeholder { color: #6f83a8; }
+.tf-nav .tf-search:focus { outline: none; border-color: #7f8fff; box-shadow: 0 0 0 3px rgba(127, 143, 255, .22); }
+.tf-search-icon { color: #6f83a8; }
+
+/* Bell, user menu, hamburger */
+.tf-bell { display: flex; align-items: center; color: #93a6ca; }
+.tf-bell:hover { color: #e7edff; }
+/* Bell button: no white pill; subtle dark highlight on hover / when the panel is open.
+   !important because the layout also loads Bootstrap. */
+.tf-bell button, .tf-bell [role="button"] { background: transparent !important; color: inherit; border-radius: 9999px; transition: background .15s, color .15s; }
+.tf-bell button:hover, .tf-bell button:focus-visible, .tf-bell button[aria-expanded="true"],
+.tf-bell [role="button"]:hover, .tf-bell [role="button"][aria-expanded="true"] { background: #14233f !important; color: #f4f7ff; }
+.tf-user-btn { border: 1px solid transparent; background: transparent; color: #aab9d7; }
+.tf-user-btn:hover, .tf-user-btn:focus-visible { color: #f4f7ff; background: #14233f; border-color: #243657; }
+.tf-burger { color: #93a6ca; }
+.tf-burger:hover, .tf-burger:focus-visible { color: #f4f7ff; background: #14233f; }
+
+/* Mobile menu */
+.tf-mobile { border-top: 1px solid #223452; background: #0a1428; }
+.tf-mobile-link { display: block; width: 100%; padding: 9px 16px; border-left: 3px solid transparent; color: #93a6ca; font-size: .95rem; font-weight: 600; text-decoration: none; }
+.tf-mobile-link:hover { color: #f4f7ff; background: #101d34; }
+.tf-mobile-link-active { color: #f4f7ff; background: #101d34; border-left-color: #8b7cff; }
+.tf-mobile-account { border-top: 1px solid #223452; }
+.tf-mobile-name { color: #f4f7ff; }
+.tf-mobile-email { color: #8194b7; }
+
+/* ---- Dashboard ---- */
+.tf-dashboard { min-height: calc(100vh - 80px); padding: 30px 24px 48px; color: #e7edff; background: radial-gradient(ellipse at 85% 0%, rgba(78, 77, 190, .18), transparent 32%), radial-gradient(ellipse at 0% 20%, rgba(21, 115, 176, .12), transparent 30%), #070f20; }
+.tf-shell { max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+.tf-header { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.tf-page-title { margin:0; color:#f4f7ff; font-size:1.45rem; font-weight:750; letter-spacing:-.03em; }
+.tf-eyebrow { margin:0 0 6px; color:#8194bd; font-size:.67rem; font-weight:800; letter-spacing:.15em; }
+.tf-subtitle { margin:5px 0 0; color:#93a6ca; font-size:.9rem; }
+.tf-header-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:10px; }
+.tf-filter { display:flex; align-items:center; gap:8px; padding:7px 10px; border:1px solid #243657; border-radius:11px; background:#101d34; color:#9db0d3; font-size:.8rem; }
+.tf-filter select { max-width:190px; border:0; outline:0; background:transparent; color:#edf2ff; }
+.tf-filter option { background:#101d34; }
+.tf-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 15px; border-radius:10px; font-size:.82rem; font-weight:700; text-decoration:none; transition:transform .18s, filter .18s; }
+.tf-button:hover { transform:translateY(-1px); filter:brightness(1.08); }
+.tf-button-primary { color:white; background:linear-gradient(135deg,#657bff,#8b5cf6); box-shadow:0 7px 22px rgba(93,104,255,.2); }
+.tf-stats-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.tf-stat { position:relative; overflow:hidden; padding:19px 20px 17px; border:1px solid #253858; border-radius:15px; background:linear-gradient(145deg,rgba(21,39,69,.96),rgba(13,25,46,.96)); }
+.tf-stat:after { content:""; position:absolute; width:110px; height:110px; right:-35px; top:-44px; border-radius:50%; background:currentColor; opacity:.055; }
+.tf-stat-blue { color:#55a8ff; border-color:#234a78; }.tf-stat-green { color:#35d6a1; border-color:#1c5b53; background:linear-gradient(145deg,#102f37,#102333); }.tf-stat-purple { color:#a18bff; border-color:#44396e; background:linear-gradient(145deg,#211d43,#141a35); }.tf-stat-red { color:#ff708f; border-color:#633247; background:linear-gradient(145deg,#301c34,#1c1b32); }
+.tf-stat-top,.tf-stat-bottom { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.tf-stat-icon { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; color:currentColor; background:rgba(255,255,255,.08); font-size:1.2rem; font-weight:800; }
+.tf-stat-tag { color:#8296bb; font-size:.59rem; font-weight:800; letter-spacing:.1em; }
+.tf-stat-label { margin:17px 0 2px; color:#aab9d7; font-size:.82rem; }
+.tf-stat-bottom strong { color:#f4f7ff; font-size:2rem; line-height:1.2; letter-spacing:-.04em; }
+.tf-stat-note { color:currentColor; font-size:.69rem; text-align:right; }
+.tf-chart-grid { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.45fr); gap:18px; }
+.tf-panel { min-width:0; padding:22px; border:1px solid #223452; border-radius:15px; background:linear-gradient(145deg,rgba(17,32,56,.97),rgba(11,23,43,.97)); box-shadow:0 12px 32px rgba(0,0,0,.08); }
+.tf-panel-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:20px; }
+.tf-panel-heading h3 { margin:0; color:#eef3ff; font-size:1rem; font-weight:750; letter-spacing:-.015em; }
+.tf-panel-heading .tf-muted { margin:5px 0 0; }
+.tf-heading-icon { display:grid; place-items:center; flex:0 0 36px; height:36px; border:1px solid #2a4166; border-radius:11px; background:#182b49; color:#8cb7ff; font-size:1.1rem; }
+.tf-heading-alert { color:#ff839d; background:#351f35; border-color:#603047; }
+.tf-donut-wrap { width:min(100%,270px); height:225px; margin:0 auto; }
+.tf-trend-chart { position:relative; height:230px; }
+.tf-muted { color:#8194b7; font-size:.8rem; }
+.tf-main-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:18px; }
+.tf-project-list,.tf-task-list,.tf-workload-list { margin:0; padding:0; list-style:none; }
+.tf-project-list { display:flex; flex-direction:column; gap:21px; }
+.tf-project-line { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:9px; }
+.tf-project-name { min-width:0; overflow:hidden; color:#e2eaff; font-size:.87rem; font-weight:650; text-overflow:ellipsis; white-space:nowrap; text-decoration:none; }
+.tf-project-name:hover,.tf-task-name:hover { color:#9eacff; }
+.tf-project-count { flex-shrink:0; color:#91a5c8; font-size:.75rem; }
+.tf-progress-track { display:flex; overflow:hidden; height:7px; border-radius:99px; background:#253652; }
+.tf-progress-fill { border-radius:99px; background:linear-gradient(90deg,#21cda1,#45e0b5); box-shadow:0 0 12px rgba(38,213,167,.16); }
+.tf-project-meta { display:flex; justify-content:space-between; gap:8px; margin-top:7px; color:#8194b7; font-size:.68rem; }
+.tf-text-link { display:inline-flex; gap:8px; margin-top:23px; color:#91a5ff; font-size:.8rem; font-weight:700; text-decoration:none; }
+.tf-text-link:hover { color:#c0c9ff; }
+.tf-task-list { display:flex; flex-direction:column; }
+.tf-task-item { display:flex; align-items:flex-start; gap:12px; padding:15px 0; border-bottom:1px solid #1f304c; }
+.tf-task-item:first-child { padding-top:0; }.tf-task-item:last-child { border-bottom:0; padding-bottom:0; }
+.tf-task-marker { flex:0 0 8px; height:8px; margin-top:6px; border-radius:50%; background:#ff6b88; box-shadow:0 0 0 4px rgba(255,107,136,.1); }
+.tf-task-content { min-width:0; flex:1; }
+.tf-task-name { color:#e6edff; font-size:.83rem; font-weight:700; text-decoration:none; }
+.tf-task-meta { overflow:hidden; margin:4px 0 0; color:#8295b7; font-size:.7rem; text-overflow:ellipsis; white-space:nowrap; }
+.tf-task-due { display:flex; flex-direction:column; align-items:flex-end; gap:5px; text-align:right; }
+.tf-task-due span { padding:4px 7px; border-radius:6px; color:#ff9aae; background:rgba(245,74,112,.12); font-size:.63rem; white-space:nowrap; }
+.tf-task-due small { color:#8194b7; font-size:.67rem; white-space:nowrap; }
+.tf-showing { margin:14px 0 0; }
+.tf-success-state { display:flex; align-items:center; gap:13px; padding:18px; border:1px solid #1f554e; border-radius:12px; background:rgba(26,151,116,.08); }
+.tf-success-state > span { display:grid; place-items:center; width:35px; height:35px; border-radius:50%; background:#164c43; color:#58e0b5; font-weight:800; }
+.tf-success-state strong { color:#dffbf2; font-size:.85rem; }.tf-success-state p { margin:4px 0 0; color:#88b9ae; font-size:.75rem; }
+.tf-legend { display:flex; gap:18px; margin:-4px 0 17px; color:#9aabca; font-size:.72rem; }
+.tf-legend span { display:inline-flex; align-items:center; gap:7px; }.tf-legend i { width:8px; height:8px; border-radius:3px; }.tf-legend-todo { background:#7283a6; }.tf-legend-progress { background:#7c70ff; }
+.tf-workload-list { display:flex; flex-direction:column; gap:17px; }
+.tf-workload-heading { display:flex; justify-content:space-between; gap:12px; margin-bottom:8px; }
+.tf-workload-heading strong { overflow:hidden; color:#dce6fb; font-size:.8rem; text-overflow:ellipsis; white-space:nowrap; }
+.tf-workload-heading span { color:#8b9fbe; font-size:.7rem; text-align:right; }
+.tf-workload-heading em { color:#ff8da3; font-style:normal; }
+.tf-workload-todo { height:100%; background:#7183a4; }.tf-workload-progress { height:100%; background:linear-gradient(90deg,#7268f5,#9b7cff); }
+.tf-unassigned { color:#a5b2cc !important; }.tf-unassigned-fill { height:100%; background:#4c5d78; }
+.tf-quick-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.tf-quick-card { display:flex; align-items:flex-start; gap:12px; min-width:0; padding:17px; border:1px solid #263958; border-radius:13px; background:linear-gradient(145deg,#142541,#0e1b31); color:inherit; text-decoration:none; transition:transform .18s,border-color .18s,background .18s; }
+.tf-quick-card:hover { transform:translateY(-3px); border-color:#5969aa; background:linear-gradient(145deg,#192c4c,#111f38); }
+.tf-quick-icon { display:grid; place-items:center; flex:0 0 35px; height:35px; border-radius:10px; color:#fff; font-size:1.1rem; font-weight:800; }
+.tf-quick-blue { background:linear-gradient(135deg,#3989ff,#5b67e8); }.tf-quick-green { background:linear-gradient(135deg,#10b981,#159c91); }.tf-quick-purple { background:linear-gradient(135deg,#a16bff,#6958e8); }.tf-quick-orange { background:linear-gradient(135deg,#ffb34d,#ed7e3e); }
+.tf-quick-card > span:nth-child(2) { display:flex; flex-direction:column; gap:6px; min-width:0; flex:1; }
+.tf-quick-card strong { color:#e8efff; font-size:.78rem; }.tf-quick-card small { color:#879bbc; font-size:.69rem; line-height:1.5; }
+.tf-quick-card b { color:#9bafff; font-size:1rem; }
+.tf-empty { padding:70px 20px; text-align:center; }.tf-empty-icon { display:grid; place-items:center; width:56px; height:56px; margin:0 auto 18px; border-radius:17px; background:#202d56; color:#a9a5ff; font-size:1.6rem; }.tf-empty h3 { margin:0; color:#f0f4ff; font-size:1.3rem; font-weight:750; }.tf-empty > p:not(.tf-eyebrow) { margin:8px 0 22px; color:#91a3c5; font-size:.88rem; }
+@media (max-width: 1050px) { .tf-stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.tf-quick-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width: 760px) { .tf-dashboard { padding:22px 14px 32px; }.tf-header { align-items:flex-start; flex-direction:column; }.tf-header-actions { width:100%; justify-content:flex-start; }.tf-chart-grid,.tf-main-grid { grid-template-columns:1fr; }.tf-panel { padding:18px; }.tf-trend-chart { height:210px; } }
+@media (max-width: 480px) { .tf-stats-grid { gap:10px; }.tf-stat { padding:14px; }.tf-stat-bottom { align-items:flex-start; flex-direction:column; gap:4px; }.tf-stat-bottom strong { font-size:1.7rem; }.tf-stat-note { text-align:left; }.tf-quick-grid { grid-template-columns:1fr; }.tf-task-item { flex-wrap:wrap; }.tf-task-due { margin-left:20px; align-items:flex-start; } }
+
+
+/* ---- Welcome page (add to the end of resources/css/app.css) ---- */
+html:has(.tf-welcome) { color-scheme: dark; }
+.tf-welcome { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; color: #e7edff; background: radial-gradient(ellipse at 85% 0%, rgba(78, 77, 190, .18), transparent 32%), radial-gradient(ellipse at 0% 20%, rgba(21, 115, 176, .12), transparent 30%), #070f20; }
+.tf-welcome-panel { width: 100%; max-width: 26rem; padding: 40px 32px; border: 1px solid #223452; border-radius: 15px; background: linear-gradient(145deg, rgba(17, 32, 56, .97), rgba(11, 23, 43, .97)); }
+.tf-welcome-panel h1 { margin: 0 0 8px; color: #f4f7ff; font-size: 1.75rem; font-weight: 700; letter-spacing: -.03em; }
+.tf-welcome-panel p { margin: 0 0 32px; color: #93a6ca; font-size: .95rem; line-height: 1.5; }
+.tf-welcome-actions { display: flex; flex-direction: column; gap: 12px; }
+.tf-welcome-actions .tf-button { padding: 12px 16px; font-size: .9rem; }
+.tf-button-secondary { color: #f4f7ff; border: 1px solid #243657; background: #101d34; }
+.tf-button-secondary:hover { border-color: #3a4f78; }
+.tf-button:focus-visible { outline: 2px solid #8b9cff; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .tf-button { transition: none; } .tf-button:hover { transform: none; } }
+
+/* ==========================================================================
+   TaskForge dark theme for inner pages
+   Append to the END of resources/css/app.css (after the existing .tf-* rules).
+   Restyles the Tailwind light utilities used in project show / index / create /
+   history, the members + files partials, and the GitHub commits table, so the
+   Blade files need no changes. Scoped to <main>, the bell dropdown and the delete modal, so the nav and header bar are
+   untouched.
+   ========================================================================== */
+
+:is(main, .tf-bell, [role="alertdialog"]) { color: #e7edff; }
+
+/* ---- Panels ---- */
+:is(main, .tf-bell, [role="alertdialog"]) .bg-white { background: linear-gradient(145deg, rgba(17, 32, 56, .97), rgba(11, 23, 43, .97)) !important; border: 1px solid #223452; border-radius: 15px; box-shadow: none !important; color: #e7edff; }
+:is(main, .tf-bell, [role="alertdialog"]) .bg-gray-50 { background-color: rgba(16, 29, 52, .85); }
+:is(main, .tf-bell, [role="alertdialog"]) .hover\:bg-gray-50:hover { background-color: #14233f; }
+
+/* ---- Borders / dividers ---- */
+:is(main, .tf-bell, [role="alertdialog"]) :is(.border, .border-b, .border-t, .border-y, .border-gray-100, .border-gray-200, .border-gray-300) { border-color: #223452; }
+:is(main, .tf-bell, [role="alertdialog"]) :is(.divide-gray-100, .divide-gray-200) > :not([hidden]) ~ :not([hidden]) { border-color: #1f304c; }
+:is(main, .tf-bell, [role="alertdialog"]) .border-transparent { border-color: transparent; }
+
+/* ---- Text ---- */
+:is(main, .tf-bell, [role="alertdialog"]) :is(.text-gray-900, .text-gray-800) { color: #f4f7ff; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-gray-700 { color: #dce6fb; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-gray-600 { color: #aab9d7; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-gray-500 { color: #93a6ca; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-gray-400 { color: #7589ad; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-indigo-600 { color: #9eacff; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-indigo-800 { color: #b4acff; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-blue-600 { color: #7fb2ff; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-green-600 { color: #35d6a1; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-green-700 { color: #58e0b5; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-red-600 { color: #ff708f; }
+:is(main, .tf-bell, [role="alertdialog"]) .text-red-700 { color: #ff9aae; }
+:is(main, .tf-bell, [role="alertdialog"]) .hover\:text-gray-900:hover, :is(main, .tf-bell, [role="alertdialog"]) .hover\:text-gray-800:hover { color: #ffffff; }
+:is(main, .tf-bell, [role="alertdialog"]) .hover\:text-blue-800:hover, :is(main, .tf-bell, [role="alertdialog"]) .hover\:text-indigo-800:hover { color: #c0c9ff; }
+:is(main, .tf-bell, [role="alertdialog"]) .hover\:text-green-800:hover { color: #58e0b5; }
+:is(main, .tf-bell, [role="alertdialog"]) .hover\:text-red-800:hover { color: #ffb0c0; }
+
+/* ---- Alerts ---- */
+:is(main, .tf-bell, [role="alertdialog"]) .bg-green-50 { background-color: rgba(26, 151, 116, .1); }
+:is(main, .tf-bell, [role="alertdialog"]) .border-green-200 { border-color: #1f554e; }
+:is(main, .tf-bell, [role="alertdialog"]) .bg-red-50 { background-color: rgba(245, 74, 112, .1); }
+:is(main, .tf-bell, [role="alertdialog"]) .border-red-200 { border-color: #603047; }
+
+/* ---- Badges / pills ---- */
+:is(main, .tf-bell, [role="alertdialog"]) .bg-green-100 { background-color: rgba(53, 214, 161, .14); }
+:is(main, .tf-bell, [role="alertdialog"]) .text-green-800 { color: #58e0b5; }
+:is(main, .tf-bell, [role="alertdialog"]) .bg-indigo-100 { background-color: rgba(139, 124, 255, .16); }
+:is(main, .tf-bell, [role="alertdialog"]) .text-indigo-800 { color: #b4acff; }
+:is(main, .tf-bell, [role="alertdialog"]) .bg-yellow-100 { background-color: rgba(250, 204, 21, .14); }
+:is(main, .tf-bell, [role="alertdialog"]) .text-yellow-800 { color: #fcd34d; }
+:is(main, .tf-bell, [role="alertdialog"]) .bg-gray-100 { background-color: rgba(147, 166, 202, .14); }
+
+/* ---- Dark buttons (Breeze primary button, Invite, Upload) ---- */
+:is(main, .tf-bell, [role="alertdialog"]) .bg-gray-800 { background: linear-gradient(135deg, #657bff, #8b5cf6); color: #fff; }
+:is(main, .tf-bell, [role="alertdialog"]) .bg-gray-800:hover { filter: brightness(1.08); }
+
+/* ---- Form controls ---- */
+:is(main, .tf-bell, [role="alertdialog"]) :is(select, textarea, input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"], [type="submit"])) { background-color: #101d34; border-color: #243657; color: #edf2ff; }
+:is(main, .tf-bell, [role="alertdialog"]) :is(select, textarea, input:not([type="checkbox"], [type="radio"], [type="file"], [type="hidden"], [type="submit"])):focus { border-color: #7f8fff; box-shadow: 0 0 0 3px rgba(127, 143, 255, .22); outline: none; }
+:is(main, .tf-bell, [role="alertdialog"]) :is(input, textarea)::placeholder { color: #6f83a8; }
+:is(main, .tf-bell, [role="alertdialog"]) select option { background: #101d34; color: #edf2ff; }
+:is(main, .tf-bell, [role="alertdialog"]) input[type="file"] { color: #93a6ca; }
+:is(main, .tf-bell, [role="alertdialog"]) input[type="file"]::file-selector-button { background: #101d34; color: #dce6fb; box-shadow: inset 0 0 0 1px #243657; }
+:is(main, .tf-bell, [role="alertdialog"]) input[type="file"]:hover::file-selector-button { background: #14233f; }
+
+/* ---- Header bar links (Task history, Back to Projects, Finished, Delete) ---- */
+header[class] .text-gray-600 { color: #93a6ca; }
+header[class] .hover\:text-gray-900:hover { color: #f4f7ff; }
+header[class] .text-green-600 { color: #35d6a1; }
+header[class] .text-red-600 { color: #ff708f; }
+header[class] .text-indigo-600 { color: #9eacff; }
+
+/* ---- GitHub commits table (Bootstrap, so !important is needed) ---- */
+#github-commits .table { --bs-table-bg: transparent; --bs-table-color: #e7edff; --bs-table-border-color: #223452; --bs-table-hover-bg: #14233f; --bs-table-hover-color: #f4f7ff; }
+#github-commits thead { background-color: #101d34 !important; }
+#github-commits :is(.text-secondary, .text-muted) { color: #93a6ca !important; }
+#github-commits .text-dark { color: #e6edff !important; }
+#github-commits .text-danger { color: #ff708f !important; }
+#github-commits .text-primary { color: #9eacff !important; }
+#github-commits .badge.bg-primary { background-color: rgba(139, 124, 255, .16) !important; color: #b4acff !important; border-color: #44396e !important; }
+#github-commits .badge.bg-secondary { background-color: rgba(147, 166, 202, .14) !important; color: #aab9d7 !important; }
+#github-commits-pagination .btn-dark { --bs-btn-bg: #101d34; --bs-btn-border-color: #243657; --bs-btn-color: #edf2ff; --bs-btn-hover-bg: #14233f; --bs-btn-hover-border-color: #3a4f78; --bs-btn-hover-color: #fff; --bs-btn-disabled-bg: #101d34; --bs-btn-disabled-border-color: #243657; --bs-btn-disabled-color: #6f83a8; }
+#github-commits-pagination .text-secondary { color: #93a6ca !important; }
+
+/* ---- Notifications bell: keep the trigger button transparent ---- */
+.tf-bell button.bg-white, .tf-bell [role="button"].bg-white { background: transparent !important; border: 0; border-radius: 9999px; }
+
+/* ---- Delete confirmation modal (x-confirm-delete) ---- */
+[role="alertdialog"] > .fixed { background-color: rgba(3, 8, 20, .75); }
+[role="alertdialog"] button.bg-white { background: #101d34 !important; border: 1px solid #243657; border-radius: .375rem; color: #dce6fb; box-shadow: none !important; }
+[role="alertdialog"] button.bg-white:hover { background: #14233f !important; }
+[role="alertdialog"] .bg-red-100 { background-color: rgba(245, 74, 112, .14); }
+header[class] .hover\:text-red-800:hover { color: #ffb0c0; }
