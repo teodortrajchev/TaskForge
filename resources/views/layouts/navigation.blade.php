@@ -45,7 +45,7 @@
 
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <x-dropdown align="right" width="48">
+                    <x-dropdown align="right" width="48" contentClasses="tf-dropdown py-1">
                         <x-slot name="trigger">
                             <button class="tf-user-btn inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md focus:outline-none transition ease-in-out duration-150">
                                 <div>{{ Auth::user()->name }}</div>
