@@ -77,6 +77,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{project}/files/{file}', [FileUploadController::class, 'download'])->name('projects.files.download');
     Route::delete('/projects/{project}/files/{file}', [FileUploadController::class, 'destroy'])->name('projects.files.destroy');
 
+
+    //About 
+    Route::view('/about', 'about')->name('about');
+    
     // Search
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     });

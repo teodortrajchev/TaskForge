@@ -22,6 +22,11 @@
                        @if (request()->routeIs('projects.*')) aria-current="page" @endif>
                         {{ __('Projects') }}
                     </a>
+                    <a href="{{ route('about') }}"
+                       class="tf-link {{ request()->routeIs('about') ? 'tf-link-active' : '' }}"
+                       @if (request()->routeIs('about')) aria-current="page" @endif>
+                        {{ __('About') }}
+                    </a>
                 </div>
             </div>
 
@@ -109,6 +114,11 @@
                class="tf-mobile-link {{ request()->routeIs('projects.*') ? 'tf-mobile-link-active' : '' }}"
                @if (request()->routeIs('projects.*')) aria-current="page" @endif>
                 {{ __('Projects') }}
+            </a>
+            <a href="{{ route('about') }}"
+            class="tf-mobile-link {{ request()->routeIs('about') ? 'tf-mobile-link-active' : '' }}"
+            @if (request()->routeIs('about')) aria-current="page" @endif>
+                About
             </a>
         </div>
 

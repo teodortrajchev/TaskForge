@@ -280,3 +280,20 @@ header[class] .hover\:text-red-800:hover { color: #ffb0c0; }
     color: #ffffff !important;
     background-color: #182b49 !important;
 }
+
+.tf-auth .tf-auth-card form,
+.tf-auth .tf-auth-card form > div {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .tf-auth {
+        padding: 24px 16px;
+    }
+
+    .tf-auth .tf-auth-card {
+        padding: 24px 20px;
+    }
+}

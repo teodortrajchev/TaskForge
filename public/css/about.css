@@ -1,0 +1,213 @@
+
+.about-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 24px 72px;
+    color: #e7edff;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+ 
+/* ---- Hero ---- */
+.about-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+}
+ 
+.about-content h1 {
+    margin: 0 0 22px;
+    color: #f4f7ff;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -.04em;
+}
+ 
+.about-content h1 span {
+    background: linear-gradient(135deg, #657bff, #a18bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+ 
+.about-intro {
+    margin: 0 0 14px;
+    color: #dce6fb;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+ 
+.about-description {
+    margin: 0 0 30px;
+    color: #93a6ca;
+    font-size: .98rem;
+    line-height: 1.75;
+}
+ 
+/* ---- Buttons ---- */
+.about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+ 
+.about-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: .88rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .18s, filter .18s, border-color .18s;
+}
+ 
+.about-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.about-button:focus-visible { outline: 2px solid #8b9cff; outline-offset: 2px; }
+ 
+.about-button-primary {
+    color: #fff;
+    background: linear-gradient(135deg, #657bff, #8b5cf6);
+    box-shadow: 0 7px 22px rgba(93, 104, 255, .22);
+}
+ 
+.about-button-secondary {
+    color: #f4f7ff;
+    border: 1px solid #243657;
+    background: #101d34;
+}
+ 
+.about-button-secondary:hover { border-color: #3a4f78; }
+ 
+/* ---- Profile card ---- */
+.about-profile {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+ 
+.profile-glow {
+    position: absolute;
+    inset: 10% 5%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(101, 123, 255, .35), transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+}
+ 
+.profile-card {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    padding: 34px 28px;
+    border: 1px solid #223452;
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(17, 32, 56, .97), rgba(11, 23, 43, .97));
+    text-align: center;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .3);
+}
+ 
+.profile-avatar {
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 18px;
+    border-radius: 24px;
+    color: #fff;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    background: linear-gradient(135deg, #657bff, #8b5cf6);
+    box-shadow: 0 10px 28px rgba(101, 123, 255, .35);
+}
+ 
+.profile-card h2 {
+    margin: 0 0 4px;
+    color: #f4f7ff;
+    font-size: 1.25rem;
+    font-weight: 750;
+}
+ 
+.profile-card > p {
+    margin: 0;
+    color: #93a6ca;
+    font-size: .88rem;
+}
+ 
+.profile-divider {
+    height: 1px;
+    margin: 22px 0 18px;
+    background: #223452;
+}
+ 
+.profile-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    color: #c3d0ea;
+    font-size: .88rem;
+    text-align: left;
+}
+ 
+.profile-detail i {
+    display: grid;
+    place-items: center;
+    flex: 0 0 32px;
+    height: 32px;
+    border: 1px solid #2a4166;
+    border-radius: 9px;
+    background: #182b49;
+    color: #8cb7ff;
+    font-size: .85rem;
+}
+ 
+/* ---- Bottom section ---- */
+.about-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    align-items: center;
+    gap: 40px;
+    padding: 36px;
+    border: 1px solid #223452;
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(17, 32, 56, .97), rgba(11, 23, 43, .97));
+}
+ 
+.about-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8194bd;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .15em;
+}
+ 
+.about-bottom h2 {
+    margin: 0;
+    color: #f4f7ff;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: -.03em;
+}
+ 
+.about-bottom p {
+    margin: 0;
+    color: #93a6ca;
+    font-size: .98rem;
+    line-height: 1.75;
+}
+ 
+/* ---- Responsive ---- */
+@media (max-width: 860px) {
+    .about-page { padding: 36px 16px 48px; gap: 36px; }
+    .about-hero, .about-bottom { grid-template-columns: 1fr; }
+    .about-bottom { padding: 26px 22px; gap: 18px; }
+}
+ 
