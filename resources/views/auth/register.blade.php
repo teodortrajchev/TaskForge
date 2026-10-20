@@ -1,4 +1,4 @@
-<x-guest-layout :title="__('Create your account')" :subtitle="__('Start tracking your projects with TaskForge.')">
+<x-auth-layout :title="__('Create your account')" :subtitle="__('Start tracking your projects with TaskForge.')">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -49,4 +49,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-auth-layout>

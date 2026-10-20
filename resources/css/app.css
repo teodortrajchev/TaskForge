@@ -297,3 +297,197 @@ header[class] .hover\:text-red-800:hover { color: #ffb0c0; }
         padding: 24px 20px;
     }
 }
+
+/* Authentication pages */
+.tf-auth {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background:
+        radial-gradient(ellipse at 15% 10%, rgba(79, 70, 229, 0.16), transparent 40%),
+        radial-gradient(ellipse at 85% 90%, rgba(6, 182, 212, 0.10), transparent 40%),
+        #080f1e;
+    color: #e2e8f0;
+}
+
+.tf-auth-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+    color: #818cf8;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.tf-auth-logo:hover {
+    color: #a5b4fc;
+    transform: translateY(-2px);
+}
+
+.tf-auth-logo svg {
+    width: 58px;
+    height: 58px;
+}
+
+.tf-auth-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 36px;
+    overflow: hidden;
+    border: 1px solid #263550;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #142139, #0e192c);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.tf-auth-head {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.tf-auth-title {
+    margin: 0;
+    color: #f1f5f9;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.tf-auth-sub {
+    margin-top: 10px;
+    color: #94a3b8;
+    font-size: 0.925rem;
+    line-height: 1.6;
+}
+
+/* Labels and form controls */
+.tf-auth form {
+    width: 100%;
+    min-width: 0;
+}
+
+.tf-auth form > div {
+    min-width: 0;
+}
+
+.tf-auth label:not([for="remember_me"]) {
+    display: block;
+    margin-bottom: 7px;
+    color: #cbd5e1 !important;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.tf-auth input:not([type="checkbox"]),
+.tf-auth select,
+.tf-auth textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 13px;
+    border: 1px solid #334563 !important;
+    border-radius: 9px !important;
+    background: #0a1426 !important;
+    color: #f1f5f9 !important;
+    font-size: 0.925rem;
+    box-shadow: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tf-auth input:not([type="checkbox"]):focus,
+.tf-auth select:focus,
+.tf-auth textarea:focus {
+    border-color: #818cf8 !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15) !important;
+}
+
+.tf-auth input::placeholder,
+.tf-auth textarea::placeholder {
+    color: #64748b;
+}
+
+.tf-auth input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #818cf8;
+    border-color: #475569;
+    background-color: #0a1426;
+}
+
+.tf-auth label[for="remember_me"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #a8b5c9 !important;
+    font-size: 0.875rem;
+}
+
+.tf-auth label[for="remember_me"] span {
+    color: inherit !important;
+}
+
+/* Authentication links */
+.tf-auth a:not(.tf-auth-logo) {
+    color: #a5b4fc;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.tf-auth a:not(.tf-auth-logo):hover {
+    color: #c7d2fe;
+    text-decoration: underline;
+}
+
+/* Primary authentication button */
+.tf-auth button,
+.tf-auth [type="submit"] {
+    min-height: 42px;
+    padding: 10px 19px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 5px 14px rgba(79, 70, 229, 0.2);
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.tf-auth button:hover,
+.tf-auth [type="submit"]:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+
+.tf-auth button:focus-visible,
+.tf-auth [type="submit"]:focus-visible {
+    outline: 2px solid #a5b4fc;
+    outline-offset: 3px;
+}
+
+/* Validation errors */
+.tf-auth [class*="text-red"],
+.tf-auth [role="alert"] {
+    color: #fca5a5;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+    .tf-auth {
+        padding: 24px 16px;
+    }
+
+    .tf-auth-card {
+        padding: 26px 20px;
+        border-radius: 14px;
+    }
+
+    .tf-auth-title {
+        font-size: 1.55rem;
+    }
+}
